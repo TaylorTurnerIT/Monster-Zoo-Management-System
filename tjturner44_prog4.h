@@ -12,7 +12,7 @@ using namespace std;
 const int MAX_ZOO_SIZE = 75; // Global maximum number of monsters the zoo can hold.
 
 struct Cost{
-    int careHoursNeeded = 0; // The number of hours it takes to take care of a specific monster per week.
+    double careHoursNeeded = 0; // The number of hours it takes to take care of a specific monster per week.
     double care = 0.0; // The cost (per week) of taking care of this monster.
     double food = 0.0; // The cost (per week) of taking care of food.
     double supplies = 0.0; // The cost of materials/supplies (grooming, medical) for this monster for one week

@@ -24,7 +24,7 @@ int loadMonstersFromFile(int monsterCount, Monster * monsterIndex){
 
     while(!file.is_open()){
         cin.clear();
-        cin.ignore();
+        cin.ignore(255, '\n');
         cout << "File not found." << endl;
         cout << "What is the name of the file with your monster data? (ex: filename.txt)" << endl;
         cout << "FILENAME:  ";
@@ -67,7 +67,7 @@ int loadMonstersFromFile(int monsterCount, Monster * monsterIndex){
 
                 case 7:
                 getline(file, lineInput, '#');
-                monsterIndex[monsterCount].costWeekly.careHoursNeeded = stoi(lineInput);
+                monsterIndex[monsterCount].costWeekly.careHoursNeeded = stod(lineInput);
                 break;
 
                 case 8:
@@ -84,8 +84,9 @@ int loadMonstersFromFile(int monsterCount, Monster * monsterIndex){
                 getline(file, lineInput, '#');
                 monsterIndex[monsterCount].costWeekly.supplies = stod(lineInput);
             }
-            cout << "\n" << monsterIndex[monsterCount].name << "has been added." << endl;
+            
         }
+        cout << "\n" << monsterIndex[monsterCount].name << "has been added." << endl;
         monsterCount++;
         if(file.eof()){ // This ends the loop at the end of the file.
             cout << "\nAll creatures from " << filename << " have been added to the program." << endl;
