@@ -1,7 +1,7 @@
 # Monster Zoo Management System
 
 This project was completed as part of an assignment for Tennessee Technological University. The goal was to create a zoo management system for fictional monsters.
-Purpose
+# Purpose
 
 The purpose of this program was to demonstrate competency in the following areas:
 
