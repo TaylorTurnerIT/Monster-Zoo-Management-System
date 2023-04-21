@@ -33,93 +33,59 @@ int loadMonstersFromFile(int monsterCount, Monster * monsterIndex){
     }
 
     cout << endl;
-    
-    while(monsterCount <= MAX_ZOO_SIZE && !file.eof() && !file.fail()){  // Iterates through each monster in the file.
-        for(int i = 1; i <= 10; i++){ // Iterates through the ten data entries per monster.
-            string lineInput;
-            getline(file, lineInput, '#');
-            switch(i){
-                case 1:
-                monsterIndex[monsterCount].name = lineInput;
-                break;
 
-                case 2:
-                monsterIndex[monsterCount].description = lineInput;
-                break;
+    string lineInput; // Simple variable that stores the input from each line of the file as it is read.
+    int line = 1; // Tracks which line of the file is being read.
 
-                case 3:
-                try {
-                monsterIndex[monsterCount].weight = stod(lineInput);
-                }
-                catch(exception e){
-                    monsterIndex[monsterCount].weight = stoi(lineInput);
-                }
-                break;
-
-                case 4:
-                try {
-                    monsterIndex[monsterCount].height = stoi(lineInput);
-                }
-                catch(exception e){
-                    monsterIndex[monsterCount].height = stod(lineInput);
-                }
-                break;
-                
-                case 5:
-                monsterIndex[monsterCount].originLocation = lineInput;
-                
-                break;
-
-                case 6:
-                try {
-                    monsterIndex[monsterCount].dangerLevel = stoi(lineInput);
-                }
-                catch(exception e){
-                    monsterIndex[monsterCount].dangerLevel = stod(lineInput);
-                }
-                break;
-
-                case 7:
-                try {
-                    monsterIndex[monsterCount].costWeekly.careHoursNeeded = stod(lineInput);
-                }
-                catch(exception e){
-                    monsterIndex[monsterCount].costWeekly.careHoursNeeded = stoi(lineInput);
-                }
-                
-                break;
-
-                case 8:
-                try {
-                    monsterIndex[monsterCount].costWeekly.care = stod(lineInput);
-                }
-                catch(exception e){
-                    monsterIndex[monsterCount].costWeekly.care = stoi(lineInput);
-                }
-                break;
-
-                case 9:
-                try {
-                    monsterIndex[monsterCount].costWeekly.food = stod(lineInput);
-                }
-                catch(exception e){
-                    monsterIndex[monsterCount].costWeekly.food = stoi(lineInput);
-                }
-                break;
-
-                case 10:
-                try {
-                    monsterIndex[monsterCount].costWeekly.supplies = stod(lineInput);
-                }
-                catch(exception e){
-                    monsterIndex[monsterCount].costWeekly.supplies = stoi(lineInput);
-                }
-                
-            }
-                    
+    while(getline(file, lineInput, '#') && !file.eof() && !file.fail()){  // Iterates through each monster in the file.
+        if (line>10){ // Resets line to 1 after all of the information for a monster has been added to the array.
+            line = 1;
         }
-        cout << "\n" << monsterIndex[monsterCount].name << " has been added." << endl;
-        monsterCount++;
+        switch(line){
+            case 1:
+            monsterCount++; // Adds one monster to the count before all of its information has been added to the array.
+            monsterIndex[monsterCount].name = lineInput;
+            break;
+
+            case 2:
+            monsterIndex[monsterCount].description = lineInput;
+            break;
+
+            case 3:
+            monsterIndex[monsterCount].weight = stod(lineInput);
+            break;
+
+            case 4:
+            monsterIndex[monsterCount].height = stoi(lineInput);
+            break;
+            
+            case 5:
+            monsterIndex[monsterCount].originLocation = lineInput;
+            break;
+
+            case 6:
+            monsterIndex[monsterCount].dangerLevel = stoi(lineInput);
+            break;
+
+            case 7:
+            monsterIndex[monsterCount].costWeekly.careHoursNeeded = stod(lineInput);
+            break;
+
+            case 8:
+            monsterIndex[monsterCount].costWeekly.care = stod(lineInput);
+            break;
+
+            case 9:
+            monsterIndex[monsterCount].costWeekly.food = stod(lineInput);
+            break;
+
+            case 10:
+            monsterIndex[monsterCount].costWeekly.supplies = stod(lineInput);
+            break;
+            }    
+
+        line++; // Increments i to move to the next line of the file.
+        cout << monsterIndex[monsterCount].name << " has been added." << endl;        
     }
     cout << "\nAll creatures from " << filename << " have been added to the program." << endl;
 
