@@ -21,7 +21,7 @@ struct Cost{
 struct Monster{
     string name; // The name of the monster.
     string description; // The description of the monster.
-    int weight = 0; // The weight of the monster (in pounds)
+    double weight = 0; // The weight of the monster (in pounds)
     int height = 0; // The heigth of the monster (in feet)
     string originLocation; // The location the monster came from before coming to the zoo
     int dangerLevel = 0; // The danger level of the monster (1 to 5 where 1 is not dangerous at all (you can pet it) to 5 being extremely dangerous (it will eat you)
