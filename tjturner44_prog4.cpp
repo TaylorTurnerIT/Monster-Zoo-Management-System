@@ -47,20 +47,27 @@ int main(){
         switch (menuChoice){
             case 1: monsterCount = registerMonster(monsterCount, monsterIndex); // Register a New Monster
                     break;
-            case 2: removeMonster(monsterCount, monsterIndex); // Remove a Monster From Zoo
+            case 2: monsterCount = removeMonster(monsterCount, monsterIndex); // Remove a Monster From Zoo
                     break;
             case 3: printMonsters(monsterCount, monsterIndex); // Print Monsters to Screen
                     break;
             case 4: printCostInfo(monsterCount, monsterIndex); // Print Monster Care Cost Data
                     break;
             case 5: programExit = true; // Exit program
+                    saveMonstersToFile(monsterCount, monsterIndex);
                     break;
             default:programExit = true; // Exit program
         }
     }
     // End program loop.
 
-    delete [] monsterIndex;
+    delete [] monsterIndex; // Free up memory.
+
+    cout << "Thank you for using the Monster Zoo Management System.";
+    // Press any button to continue...
+    cin.ignore();
+    cin.get();
+
     return 0;
     
 }

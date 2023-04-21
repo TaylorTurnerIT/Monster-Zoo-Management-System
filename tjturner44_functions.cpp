@@ -118,7 +118,7 @@ Description:
 */
 int registerMonster(int monsterCount, Monster * monsterIndex){
     if (monsterCount > MAX_ZOO_SIZE){
-        cout << "The zoo is currently full. No more monsters can be added." << endl;
+        cout << "\n\nThe zoo is currently full. No more monsters can be added." << endl;
         return monsterCount; // Returns MAX_ZOO_SIZE (75) if the zoo is full.
     }
 
@@ -127,7 +127,7 @@ int registerMonster(int monsterCount, Monster * monsterIndex){
     double userInputDouble; // Double stores the users input for each piece of information about the monster.
 
     monsterCount++; // Adds one monster to the count after all of its information has been added to the array.
-    cout << "NAME: ";
+    cout << "\n\nNAME: ";
     cin.ignore();
     getline(cin, userInputString);
     monsterIndex[monsterCount].name = userInputString;
@@ -189,7 +189,7 @@ Description:
 */
 int removeMonster(int monsterCount, Monster * monsterIndex){
     string userInputString; // String stores the users input for the name of the monster they want to remove.
-    cout << "The following is a list of all the monsters in the zoo:" << endl;
+    cout << "\n\nThe following is a list of all the monsters in the zoo:" << endl;
     for(int i = 1; i <= monsterCount; i++){ // Iterates through the monster array and prints the name of each monster.
         cout << monsterIndex[i].name << endl;
     }
@@ -252,12 +252,12 @@ Description:
 */
 void printMonsters(int monsterCount, Monster * monsterIndex){
     if (monsterCount == 0){ // If there are no monsters in the array, the user is notified.
-        cout << "THERE ARE NO MONSTERS AT YOUR ZOO!" << endl;
+        cout << "\n\nTHERE ARE NO MONSTERS AT YOUR ZOO!" << endl;
         return;
     }
     for (int i = 1; i <= monsterCount; i++){ // Iterates through the monster array and prints all information for each monster.
         string description = wrapText(monsterIndex[i].description, 60); // Wraps the description of the monster to a new line if the line exceeds 72 characters.
-        cout << "------------------------------------------------------------------------";
+        cout << "\n\n------------------------------------------------------------------------";
         cout << "\n**MONSTER " << i << "**" << endl;
         cout << "Name:\t" << monsterIndex[i].name << endl;
         cout << "Description:\n\t" << description << endl;
@@ -283,7 +283,7 @@ Description:
     Writes a detailed receipt of each monsters weekly cost, including a total.
 */
 void printCostInfo(int monsterCount, Monster * monsterIndex){
-    cout << "COST OF EACH MONSTER FOR ONE WEEK:" << endl << endl;
+    cout << "\n\nCOST OF EACH MONSTER FOR ONE WEEK:" << endl << endl;
     cout << left << setw(42) << "MONSTER" <<"CARE COST" << endl;
     double careCostTotal = 0;
     for(int i = 1; i <= monsterCount; i++){ // Iterates through the monster array and prints the name of each monster and the cost of care for that monster.
@@ -307,5 +307,34 @@ Description:
     Allows the user to save the monster array to a file.
 */
 void saveMonstersToFile(int monsterCount, Monster * monsterIndex){
-    
+    cout << "\n\nWould you like to save your mosnter list to a file? (y/n)" << endl;
+    char userInputChar;
+    cin >> userInputChar;
+    if (userInputChar == 'y' || userInputChar == 'Y'){ // If the user wants to save the monster array to a file, the user is prompted for a file name.
+        cout << "What is the name of the file you want to save your creatures to?" << endl;
+        cout << "FILENAME:\t";
+        string fileName;
+        cin.ignore();
+        getline(cin, fileName);
+        ofstream outputFile(fileName); // Opens the file for output.
+        if (outputFile.is_open()){ // If the file is open, the monster array is written to the file.
+            for(int i = 1; i <= monsterCount; i++){
+                outputFile << monsterIndex[i].name << '#';
+                outputFile << monsterIndex[i].description << '#';
+                outputFile << monsterIndex[i].weight << '#';
+                outputFile << monsterIndex[i].height << '#';
+                outputFile << monsterIndex[i].originLocation << '#';
+                outputFile << monsterIndex[i].dangerLevel << '#';
+                outputFile << monsterIndex[i].costWeekly.careHoursNeeded << '#';
+                outputFile << monsterIndex[i].costWeekly.care << '#';
+                outputFile << monsterIndex[i].costWeekly.food << '#';
+                outputFile << monsterIndex[i].costWeekly.supplies << '#';
+            }
+            outputFile.close(); // Closes the file.
+            cout << "Your monster list has been saved to " << fileName << endl;
+        }
+        else{ // If the file is not open, the user is notified.
+            cout << "Sorry, the file could not be opened." << endl;
+        }
+    }
 }
