@@ -22,9 +22,8 @@ int loadMonstersFromFile(int monsterCount, Monster * monsterIndex){
 
     ifstream file(filename); // Opens file at string filename.
 
-    while(!file.is_open()){
+    while(!file.is_open()){ // Checks if the file is open. If not, it will ask for a new filename.
         cin.clear();
-        cin.ignore(255, '\n');
         cout << "File not found." << endl;
         cout << "What is the name of the file with your monster data? (ex: filename.txt)" << endl;
         cout << "FILENAME:  ";
@@ -85,7 +84,7 @@ int loadMonstersFromFile(int monsterCount, Monster * monsterIndex){
             break;
             }    
 
-        line++; // Increments i to move to the next line of the file.
+        line++; // Increments to move to the next line of the file.
         
     }
     cout << "\nAll creatures from " << filename << " have been added to the program." << endl;
@@ -190,26 +189,26 @@ Description:
 int removeMonster(int monsterCount, Monster * monsterIndex){
     string userInputString; // String stores the users input for the name of the monster they want to remove.
     cout << "The following is a list of all the monsters in the zoo:" << endl;
-    for(int i = 1; i <= monsterCount; i++){
+    for(int i = 1; i <= monsterCount; i++){ // Iterates through the monster array and prints the name of each monster.
         cout << monsterIndex[i].name << endl;
     }
     cout << "Which monster is leaving the zoo?" << endl;
     cout << "MONSTER NAME:  ";
-
+    cin.ignore();
     getline(cin, userInputString);
 
-    for(int i = 1; i <= monsterCount; i++){
-        if (userInputString == monsterIndex[i].name){
-            for(int j = i; j < monsterCount; j++){
-                monsterIndex[j] = monsterIndex[j+1];
+    for(int i = 1; i <= monsterCount; i++){ // Iterates through the monster array.
+        if (userInputString == monsterIndex[i].name){ // If the name of the monster matches the name of the monster in the array, the monster is removed.
+            for(int j = i; j <= monsterCount; j++){ // Iterates through the monster array, starting at the monster that is being removed.
+                monsterIndex[j] = monsterIndex[j+1]; // Moves the next monster in the array to the current position in the array.
             }
             monsterCount--;
             cout << userInputString << " has been removed from the zoo." << endl;
-            return;
+            return monsterCount; // Returns the new number of monsters in the array.
         }
     }
-    cout << "Sorry, a monster by that name " << userInputString << " could not be found." << endl;
-    
+    cout << "Sorry, a monster by that name " << userInputString << " could not be found." << endl; // If the name of the monster does not match the name of any monster in the array, the user is notified.
+    return monsterCount; // Returns the original number of monsters in the array.
 }
 
 /*
