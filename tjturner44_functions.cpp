@@ -283,7 +283,19 @@ Description:
     Writes a detailed receipt of each monsters weekly cost, including a total.
 */
 void printCostInfo(int monsterCount, Monster * monsterIndex){
-    
+    cout << "COST OF EACH MONSTER FOR ONE WEEK:" << endl << endl;
+    cout << left << setw(42) << "MONSTER" <<"CARE COST" << endl;
+    double careCostTotal = 0;
+    for(int i = 1; i <= monsterCount; i++){ // Iterates through the monster array and prints the name of each monster and the cost of care for that monster.
+        double careCost = (monsterIndex[i].costWeekly.careHoursNeeded * monsterIndex[i].costWeekly.care) + monsterIndex[i].costWeekly.food + monsterIndex[i].costWeekly.supplies; 
+        // ^ Calculates the total cost of care for the individual monster.
+        careCostTotal += careCost;
+        // ^ Calculates the total cost of care for all the monsters.
+
+        cout << left << setw(30) << monsterIndex[i].name << "$" << right << setw(20) << fixed << setprecision(2) << careCost << endl; 
+        // ^ Prints the name of the monster and the cost of care for that monster on the same line with the cost aligned to the right. 
+    }
+    cout << left << setw(30) << "Total" << "$" << right << setw(20) << fixed << setprecision(2) << careCostTotal << endl;
 }
 
 /*
