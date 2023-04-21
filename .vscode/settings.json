@@ -4,6 +4,9 @@
         "ostream": "cpp",
         "string": "cpp",
         "xiosbase": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "sstream": "cpp",
+        "ios": "cpp",
+        "iomanip": "cpp"
     }
 }

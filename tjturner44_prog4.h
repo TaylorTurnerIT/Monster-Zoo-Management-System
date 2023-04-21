@@ -59,6 +59,16 @@ Description:
 int removeMonster(int, Monster*);
 
 /*
+Function: wrapText
+Parameters: 
+    String of text to be wrapped.
+    Maximum number of characters per line.
+Description:
+    Wraps text to a new line if the line exceeds the maximum number of characters.
+*/
+string wrapText(const string&, int);
+
+/*
 Function: printMonsters
 Parameters:
     Number of monsters in the monsters array.

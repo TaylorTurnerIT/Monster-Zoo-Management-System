@@ -2,6 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <sstream>
 #include "tjturner44_prog4.h"
 
 using namespace std;
@@ -211,6 +212,36 @@ int removeMonster(int monsterCount, Monster * monsterIndex){
     return monsterCount; // Returns the original number of monsters in the array.
 }
 
+
+
+/*
+Function: wrapText
+Parameters: 
+    String of text to be wrapped.
+    Maximum number of characters per line.
+Description:
+    Wraps text to a new line if the line exceeds the maximum number of characters.
+*/
+string wrapText(const string& text, int maxCharsPerLine)
+{
+    stringstream ss(text); // String stream allows the string to be split into words.
+    string line, word; // Line stores the current line of text. Word stores the current word being added to the line.
+    string wrappedText; // String that will be returned.
+
+    while (getline(ss, word, ' ')) // Iterates through the string stream, splitting the string into words.
+    {
+        if (line.length() + word.length() > maxCharsPerLine) // If the line exceeds the maximum number of characters, the line is added to the wrapped text and the line is reset.
+        {
+            wrappedText += line + "\n\t"; // Adds the line to the wrapped text and adds a tab to the beginning of the next line.
+            line = "";
+        }
+        line += word + ' ';
+    }
+
+    wrappedText += line;
+    return wrappedText;
+}
+
 /*
 Function: printMonsters
 Parameters:
@@ -220,7 +251,27 @@ Description:
     Lists all of the monsters in the monster array. Includes all information for each monster.
 */
 void printMonsters(int monsterCount, Monster * monsterIndex){
-    
+    if (monsterCount == 0){ // If there are no monsters in the array, the user is notified.
+        cout << "THERE ARE NO MONSTERS AT YOUR ZOO!" << endl;
+        return;
+    }
+    for (int i = 1; i <= monsterCount; i++){ // Iterates through the monster array and prints all information for each monster.
+        string description = wrapText(monsterIndex[i].description, 60); // Wraps the description of the monster to a new line if the line exceeds 72 characters.
+        cout << "------------------------------------------------------------------------";
+        cout << "\n**MONSTER " << i << "**" << endl;
+        cout << "Name:\t" << monsterIndex[i].name << endl;
+        cout << "Description:\n\t" << description << endl;
+        cout << "Weight:\t" << monsterIndex[i].weight << " pound(s)" << endl;
+        cout << "Height:\t" << monsterIndex[i].height << " feet" << endl;
+        cout << "Last known location:\t" << monsterIndex[i].originLocation << endl;
+        cout << "Danger level:\t" << monsterIndex[i].dangerLevel << endl;
+        cout << "Weekly Care Information:" << endl;
+        cout << "\t-Hours of care required:        " << monsterIndex[i].costWeekly.careHoursNeeded << endl;
+        cout << "\t-Cost of care:                  $ " << fixed << setprecision(2) << monsterIndex[i].costWeekly.care << endl;
+        cout << "\t-Food cost:                     $ " << fixed << setprecision(2) << monsterIndex[i].costWeekly.food << endl;
+        cout << "\t-Grooming & Supplies Cost:      $ " << fixed << setprecision(2) << monsterIndex[i].costWeekly.supplies << endl;
+    }
+        cout << "------------------------------------------------------------------------" << endl; // Prints a line to separate the monster list from the menu.
 }
 
 /*
