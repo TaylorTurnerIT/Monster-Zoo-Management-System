@@ -56,7 +56,7 @@ Parameters:
 Description:
     Removes a monster from the monster array.
 */
-void removeMonster(int, Monster*);
+int removeMonster(int, Monster*);
 
 /*
 Function: printMonsters

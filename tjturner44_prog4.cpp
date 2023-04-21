@@ -20,7 +20,7 @@ int main(){
     bool programExit = false; // Tracks when the user wishes to exit the program.
     int menuChoice = 0; // Tracks the current menu choice.
 
-    loadMonstersFromFile(monsterCount, monsterIndex);
+    monsterCount = loadMonstersFromFile(monsterCount, monsterIndex);
     
     // Begin program loop.
     while (programExit != true){
@@ -31,7 +31,7 @@ int main(){
         cout << "\t4.  Print Monster Care Cost Data" << endl;
         cout << "\t5.  End Program" << endl;
         cout << "\tEnter 1, 2, 3, 4, or 5." << endl;
-        cout << "CHOICE:";
+        cout << "CHOICE:  ";
     
         cin >> menuChoice; 
 
@@ -39,12 +39,13 @@ int main(){
             cin.clear();
             cin.ignore(255, '\n');
             cout << "Invalid choice. Please try again." << endl;
-            cout << "CHOICE:";
+            cout << "CHOICE:  ";
             cin >> menuChoice;
+            cin.ignore();
         }
 
         switch (menuChoice){
-            case 1: registerMonster(monsterCount, monsterIndex); // Register a New Monster
+            case 1: monsterCount = registerMonster(monsterCount, monsterIndex); // Register a New Monster
                     break;
             case 2: removeMonster(monsterCount, monsterIndex); // Remove a Monster From Zoo
                     break;

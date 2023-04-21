@@ -43,8 +43,9 @@ int loadMonstersFromFile(int monsterCount, Monster * monsterIndex){
         }
         switch(line){
             case 1:
-            monsterCount++; // Adds one monster to the count before all of its information has been added to the array.
+            monsterCount++; // Adds one monster to the count before all of its information has been added to the array. Also iterates the monster.
             monsterIndex[monsterCount].name = lineInput;
+            cout << monsterIndex[monsterCount].name << " has been added." << endl;
             break;
 
             case 2:
@@ -85,7 +86,7 @@ int loadMonstersFromFile(int monsterCount, Monster * monsterIndex){
             }    
 
         line++; // Increments i to move to the next line of the file.
-        cout << monsterIndex[monsterCount].name << " has been added." << endl;        
+        
     }
     cout << "\nAll creatures from " << filename << " have been added to the program." << endl;
 
@@ -116,6 +117,65 @@ Description:
     Takes information from the user  and adds it to the monster array.
 */
 int registerMonster(int monsterCount, Monster * monsterIndex){
+    if (monsterCount > MAX_ZOO_SIZE){
+        cout << "The zoo is currently full. No more monsters can be added." << endl;
+        return monsterCount; // Returns MAX_ZOO_SIZE (75) if the zoo is full.
+    }
+
+    string userInputString; // String stores the users input for each piece of information about the monster.
+    int userInputInt; // Int stores the users input for each piece of information about the monster.
+    double userInputDouble; // Double stores the users input for each piece of information about the monster.
+
+    monsterCount++; // Adds one monster to the count after all of its information has been added to the array.
+    cout << "NAME: ";
+    cin.ignore();
+    getline(cin, userInputString);
+    monsterIndex[monsterCount].name = userInputString;
+
+    cout << "\nDESCRIPTION:  ";
+    getline(cin, userInputString);
+    monsterIndex[monsterCount].description = userInputString;
+
+    cout << "\nWEIGHT (in pounds):  ";
+    cin >> userInputDouble;
+    monsterIndex[monsterCount].weight = userInputDouble;
+    cin.ignore();
+
+    cout << "\nHEIGHT (in feet):  ";
+    cin >> userInputInt;
+    monsterIndex[monsterCount].height = userInputInt;
+    cin.ignore();
+
+    cout << "\nLAST KNOWN LOCATION:  ";
+    getline(cin, userInputString);
+    monsterIndex[monsterCount].originLocation = userInputInt;
+
+    cout << "\nDANGER LEVEL (1-5):  ";
+    cin >> userInputInt;
+    monsterIndex[monsterCount].dangerLevel = userInputInt;
+    cin.ignore();
+
+    cout << "\nCARE INFORMATION (per week):";
+    cout << "\n\tRequired direct care for monster (in hours) ";
+    cin >> userInputDouble;
+    monsterIndex[monsterCount].costWeekly.careHoursNeeded = userInputDouble;
+    cin.ignore();
+
+    cout << "\n\tCost of care $  ";
+    cin >> userInputDouble;
+    monsterIndex[monsterCount].costWeekly.care = userInputDouble;
+    cin.ignore();
+
+    cout << "\n\tFood cost $  ";
+    cin >> userInputDouble;
+    monsterIndex[monsterCount].costWeekly.food = userInputDouble;
+    cin.ignore();
+
+    cout << "\n\tMedical & grooming cost $ ";
+    cin >> userInputDouble;
+    monsterIndex[monsterCount].costWeekly.supplies = userInputDouble;
+    cin.ignore();
+    
     return monsterCount;
 }
 
@@ -127,7 +187,28 @@ Parameters:
 Description:
     Removes a monster from the monster array.
 */
-void removeMonster(int monsterCount, Monster * monsterIndex){
+int removeMonster(int monsterCount, Monster * monsterIndex){
+    string userInputString; // String stores the users input for the name of the monster they want to remove.
+    cout << "The following is a list of all the monsters in the zoo:" << endl;
+    for(int i = 1; i <= monsterCount; i++){
+        cout << monsterIndex[i].name << endl;
+    }
+    cout << "Which monster is leaving the zoo?" << endl;
+    cout << "MONSTER NAME:  ";
+
+    getline(cin, userInputString);
+
+    for(int i = 1; i <= monsterCount; i++){
+        if (userInputString == monsterIndex[i].name){
+            for(int j = i; j < monsterCount; j++){
+                monsterIndex[j] = monsterIndex[j+1];
+            }
+            monsterCount--;
+            cout << userInputString << " has been removed from the zoo." << endl;
+            return;
+        }
+    }
+    cout << "Sorry, a monster by that name " << userInputString << " could not be found." << endl;
     
 }
 
