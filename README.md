@@ -7,6 +7,7 @@ The purpose of this program was to demonstrate competency in the following areas
 
     Terminal formatting
     File I/O
+    Dynamically allocating memory
     Using arrays of abstract data types
 
 # Features
