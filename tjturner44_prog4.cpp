@@ -20,9 +20,12 @@ int main(){
     bool programExit = false; // Tracks when the user wishes to exit the program.
     int menuChoice = 0; // Tracks the current menu choice.
 
-    monsterCount = loadMonstersFromFile(monsterCount, monsterIndex);
+    cout << "WELCOME TO THE MONSTER ZOO MANAGEMENT SYSTEM" << endl;
+    monsterCount = loadMonstersFromFile(monsterCount, monsterIndex); // Load monsters from file.
     
     // Begin program loop.
+
+
     while (programExit != true){
         cout << "What would you like to do?" << endl;
         cout << "\t1.  Register a New Monster" << endl;

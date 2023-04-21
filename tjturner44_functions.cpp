@@ -147,6 +147,7 @@ int registerMonster(int monsterCount, Monster * monsterIndex){
     cin.ignore();
 
     cout << "\nLAST KNOWN LOCATION:  ";
+    cin.ignore();
     getline(cin, userInputString);
     monsterIndex[monsterCount].originLocation = userInputInt;
 
@@ -175,6 +176,8 @@ int registerMonster(int monsterCount, Monster * monsterIndex){
     cin >> userInputDouble;
     monsterIndex[monsterCount].costWeekly.supplies = userInputDouble;
     cin.ignore();
+
+    cout << "\n\n" << monsterIndex[monsterCount].name << " has been added." << endl;
     
     return monsterCount;
 }
@@ -204,7 +207,7 @@ int removeMonster(int monsterCount, Monster * monsterIndex){
                 monsterIndex[j] = monsterIndex[j+1]; // Moves the next monster in the array to the current position in the array.
             }
             monsterCount--;
-            cout << userInputString << " has been removed from the zoo." << endl;
+            cout << userInputString << " has been removed from the zoo." << endl << endl << endl;
             return monsterCount; // Returns the new number of monsters in the array.
         }
     }
