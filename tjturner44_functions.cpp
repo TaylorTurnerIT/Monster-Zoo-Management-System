@@ -36,45 +36,53 @@ int loadMonstersFromFile(int monsterCount, Monster * monsterIndex){
     
     while(monsterCount < MAX_ZOO_SIZE){  // Iterates through each monster in the file.
         for(int i = 1; i <= 10; i++){ // Iterates through the ten data entries per monster.
+            string lineInput;
             switch(i){
                 case 1:
-                file >> monsterIndex[monsterCount].name;
+                getline(file, monsterIndex[monsterCount].name, '#');
                 break;
 
                 case 2:
-                file >> monsterIndex[monsterCount].description;
+                getline(file, monsterIndex[monsterCount].description, '#');
                 break;
 
                 case 3:
-                file >> monsterIndex[monsterCount].weight;
+                getline(file, lineInput, '#');
+                monsterIndex[monsterCount].weight = stoi(lineInput);
                 break;
 
                 case 4:
-                file >> monsterIndex[monsterCount].height;
+                getline(file, lineInput, '#');
+                monsterIndex[monsterCount].height = stoi(lineInput);
                 break;
                 
                 case 5:
-                file >> monsterIndex[monsterCount].originLocation;
+                getline(file, monsterIndex[monsterCount].originLocation, '#');
                 break;
 
                 case 6:
-                file >> monsterIndex[monsterCount].dangerLevel;
+                getline(file, lineInput, '#');
+                monsterIndex[monsterCount].dangerLevel = stoi(lineInput);
                 break;
 
                 case 7:
-                file >> monsterIndex[monsterCount].costWeekly.careHoursNeeded;
+                getline(file, lineInput, '#');
+                monsterIndex[monsterCount].costWeekly.careHoursNeeded = stoi(lineInput);
                 break;
 
                 case 8:
-                file >> monsterIndex[monsterCount].costWeekly.care;
+                getline(file, lineInput, '#');
+                monsterIndex[monsterCount].costWeekly.care = stod(lineInput);
                 break;
 
                 case 9:
-                file >> monsterIndex[monsterCount].costWeekly.food;
+                getline(file, lineInput, '#');
+                monsterIndex[monsterCount].costWeekly.food = stod(lineInput);
                 break;
 
                 case 10:
-                file >> monsterIndex[monsterCount].costWeekly.supplies;
+                getline(file, lineInput, '#');
+                monsterIndex[monsterCount].costWeekly.supplies = stod(lineInput);
             }
             cout << "\n" << monsterIndex[monsterCount].name << "has been added." << endl;
         }
