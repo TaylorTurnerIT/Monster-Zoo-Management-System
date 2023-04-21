@@ -92,19 +92,6 @@ int loadMonstersFromFile(int monsterCount, Monster * monsterIndex){
 
     file.close();
     return monsterCount;
-
-    /*
-            What is the name of the file with your monster data? (ex: filename.txt)
-            FILENAME:  monsterFile_4-3-2023.txt
-
-            Zombiedog has been added.
-            Chucky Chupacabra has been added.
-            Celfy has been added.
-            Fliggerwit Fletcher has been added.
-            Orgodore Borgmore has been added.
-
-            All creatures from monsterFile_4-3-2023.txt have been added to the program.
-*/
 }
 
 
